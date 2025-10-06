@@ -1,0 +1,35 @@
+Set static IPs on the servers 
+
+On S1:
+
+Desktop → IP Configuration
+
+IP Address: 192.168.10.10
+
+Subnet Mask: 255.255.255.0
+
+Default Gateway: 192.168.10.1
+
+Configure DHCP pools (Packet Tracer Server GUI)
+
+On S1 (DHCP-S1) → Services → DHCP
+
+Create Pool VLAN10-HR
+
+Default Gateway: 192.168.10.1
+
+Start IP: 192.168.10.50
+
+End IP: 192.168.10.100
+
+Subnet Mask: 255.255.255.0
+
+Create Pool VLAN20-FIN
+
+Default Gateway: 192.168.20.1
+
+Start IP: 192.168.20.50
+
+End IP: 192.168.20.100
+
+Subnet Mask: 255.255.255.0
