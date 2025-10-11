@@ -4,7 +4,7 @@
 1.  [📘 Project Overview](#-project-overview)
 2.  [🎯 Project Objective](#-project-objective)
 3.  [🌐 Network Topology](#-network-topology)
-4.  [🗂️ Device Interface Table](#-device-interface-table)
+4.  [🖧 Device Interface Table](#-device-interface-table)
 5.  [📝 IP Addressing Table](#-ip-addressing-table)
 6.  [🔧 Lab Steps](#-lab-steps)
 7.  [💻 Device Configuration](#-device-configuration)
@@ -54,7 +54,7 @@ Manual IP assignment was used for demonstration purposes to verify the lab objec
 
 ---
 
-## 🗂️ Device Interface Table
+## 🖧 Device Interface Table
 
 | Device   | Interface | Connected Device| Connected Interface| VLAN / Notes                 |
 |----------|-----------|-----------------|-------------------|-------------------------------|
