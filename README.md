@@ -1,25 +1,27 @@
-﻿# Project 5: DHCP Redundancy with Failover in Office Network
+﻿# 📡🌐 DHCP Redundancy with Failover in Office Network 🔄🖥️
 
 ## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Project Objective](#project-objective)
-3. [Lab Topology](#lab-topology)
-4. [Device Interface Table](#device-interface-table)
-5. [IP Addressing Table](#ip-addressing-table)
-6. [Lab Steps](#lab-steps)
-7. [Device Configuration](#device-configuration)
-   - [Switch 1](#switch-1)  
-   - [Switch 2](#switch-2)  
-   - [Router 1](#router-1)  
-   - [Server 1 DHCP POOL](#server-1-dhcp-pool)  
-   - [Server 2 DHCP POOL](#server-2-dhcp-pool)   
+1. [📘 Project Overview](#-project-overview)
+2. [🎯 Project Objective](#-project-objective)
+3. [🌐 Network Topology](#-network-topology)
+4. [🗂️ Device Interface Table](#-device-interface-table)
+5. [📝 IP Addressing Table](#-ip-addressing-table)
+6. [🔧 Lab Steps](#-lab-steps)
+7. [💻 Device Configuration](#-device-configuration)
+   - [🔀 Switch 1](#-switch-1)  
+   - [🔀 Switch 2](#-switch-2)  
+   - [🚦 Router 1](#-router-1)  
+   - [📡 Server 1 DHCP POOL](#-server-1-dhcp-pool)  
+   - [📡 Server 2 DHCP POOL](#-server-2-dhcp-pool)   
 8. [Packet Tracer Limitations & Workarounds](#packet-tracer-limitations-workarounds)
-9. [Verification](#verification)
-10. [Folder Structure](#folder-structure)
-
+9. [✅ Verification](#-verification)
+10.[⚡ How to Run Lab](#-how-to-run-lab)
+11.[📂 -Folder Structure](#folder-structure)
+12.[🎓 Learning Outcomes](#-learning-outcomes)
+13.[ℹ️ Repository Info](#-repository-info)
 ---
 
-## 1️⃣ Project Overview
+## 📘 Project Overview
 
 This lab demonstrates DHCP redundancy in a small office network. Two DHCP servers provide IP addresses to PCs across VLANs. 
 If the primary DHCP server fails, the backup server ensures continued IP availability. 
@@ -31,7 +33,7 @@ Manual IP assignment was used for demonstration purposes to verify the lab objec
 
 ---
 
-## 2️⃣ Project Objective
+## 🎯 Project Objective
 
 - Configure DHCP pools on a primary server for VLAN10 and VLAN20.
 - Configure a backup DHCP server to provide failover.
@@ -41,18 +43,18 @@ Manual IP assignment was used for demonstration purposes to verify the lab objec
 
 ---
 
-## 3️⃣ Lab Topology
+## 🌐 Network Topology
 
 - **Devices:** 2 DHCP Servers, 1 Router (R1), 2 Switches (SW1, SW2), 6 PCs  
 - **VLAN Assignment:**  
   - VLAN10: PC1, PC2, PC5  
   - VLAN20: PC3, PC4, PC6  
 
-**Draw.io Topology File:**  
+<img src="topology/dhcp-failover-drawio.png" alt="TOPOLOGY OVERVIEW" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 ---
 
-## 4️⃣ Device Interface Table
+## 🗂️ Device Interface Table
 
 | Device   | Interface | Connected Device| Connected Interface| VLAN / Notes                 |
 |----------|-----------|-----------------|-------------------|-------------------------------|
@@ -71,7 +73,7 @@ Manual IP assignment was used for demonstration purposes to verify the lab objec
 
 ---
 
-## 5️⃣ IP Addressing Table
+## 📝 IP Addressing Table
 
 | Device / VLAN | IP Address (Planned DHCP Pool) | Subnet Mask     | Default Gateway| Notes / Verification Workaround         |
 |---------------|--------------------------------|-----------------|----------------|-----------------------------------------|
@@ -90,7 +92,7 @@ Manual IP assignment was used for demonstration purposes to verify the lab objec
 
 ---
 
-## 6️⃣ Lab Steps
+## 🔧 Lab Steps
 
 1. Configure VLANs on SW1 and SW2.  
 2. Configure router-on-a-stick (R1 subinterfaces) for VLAN10 & VLAN20.  
@@ -103,22 +105,10 @@ Manual IP assignment was used for demonstration purposes to verify the lab objec
 
 ---
 
-## 7️⃣ Device Configuration
+## 💻 Device Configuration
 
-### Switch 1 
-```text
-enable
-configure terminal
-```
-! Set hostname
-```
-hostname SW1
-```
-! Disable DNS lookup to avoid delays
-```text
-no ip domain-lookup
-```
-! Create VLANs
+### 🔀 Switch 1 
+
 ```text
 vlan 10
 name HR
@@ -134,75 +124,13 @@ switchport mode access
 switchport access vlan 10
 description PC1
 exit
+```
 
-interface fa0/2
-switchport mode access
-switchport access vlan 10
-description PC2
-exit
+[View Full Configuration File →](configs/switch-config/sw1.cfg)
 
-interface fa0/3
-switchport mode access
-switchport access vlan 20
-description PC3
-exit
-
-interface fa0/4
-switchport mode access
-switchport access vlan 10
-description DHCP_Server1
-exit
-
-interface fa0/5
-switchport mode access
-switchport access vlan 10
-description DHCP_Server2_Backup
-exit
-```
-! Inter-switch trunk link
-```text
-interface fa0/23
-switchport trunk encapsulation dot1q
-switchport mode trunk
-switchport trunk allowed vlan 10,20
-description Trunk_to_SW2
-exit
-```
-! Router trunk link
-```text
-interface fa0/24
-switchport trunk encapsulation dot1q
-switchport mode trunk
-switchport trunk allowed vlan 10,20
-description Trunk_to_Router
-exit
-```
-! Enable trunk ports and access ports
-```text
-interface range fa0/1 - 5 , fa0/23 - 24
-no shutdown
-exit
-```
-! Save configuration
-```text
-end
-write memory
-```
 ---
-### Switch 2
-```text
-enable
-configure terminal
-```
-! Hostname
-```text
-hostname SW2
-```
-! Avoid DNS lookup
-```text
-no ip domain-lookup
-```
-! Create VLANs
+### 🔀 Switch 2
+
 ```text
 vlan 10
 name HR
@@ -219,58 +147,12 @@ switchport mode access
 switchport access vlan 20
 no shutdown
 exit
+```
+[View Full Configuration File →](config/switch-config/sw2.cfg)
 
-interface fa0/2
-description PC5
-switchport mode access
-switchport access vlan 10
-no shutdown
-exit
-
-interface fa0/3
-description PC6
-switchport mode access
-switchport access vlan 20
-no shutdown
-exit
-```
-! Inter-switch trunk to SW1
-```text
-interface fa0/23
-description Trunk_to_SW1
-switchport mode trunk
-switchport trunk allowed vlan 10,20
-no shutdown
-exit
-```
-! Router trunk link on SW2 (to Router G0/1)
-```text
-interface fa0/24
-description Trunk_to_Router_G0/1
-switchport mode trunk
-switchport trunk allowed vlan 10,20
-no shutdown
-exit
-```
-```text
-end
-write memory
-```
 ---
-### Router 1
-```text
-enable
-configure terminal
+### 🚦 Router 1
 
-hostname R1
-```
-! Ensure physical interface up
-```text
-interface GigabitEthernet0/0
-no shutdown
-exit
-```
-! Subinterface for VLAN 10
 ```text
 interface GigabitEthernet0/0.10
 description VLAN10 - HR
@@ -279,43 +161,12 @@ ip address 192.168.10.1 255.255.255.0
 no shutdown
 exit
 ```
-! Subinterface for VLAN 20
-```text
-interface GigabitEthernet0/0.20
-description VLAN20 - IT
-encapsulation dot1Q 20
-ip address 192.168.20.1 255.255.255.0
-no shutdown
-exit
-```
-! DHCP relay (forward DHCP/BOOTP requests to both primary and backup servers)
-! Primary DHCP server IP: 192.168.10.10
-! Backup DHCP server IP: 192.168.10.11
-```text
-interface GigabitEthernet0/0.20
-ip helper-address 192.168.10.10
-ip helper-address 192.168.10.11
-exit
-```
-! Optional: set a hostname and disable DNS lookup (avoids delays)
-```text
-no ip domain-lookup
+[View Full Configuration File →](configs/router-config/r1.cfg)
 
-end
-write memory
-```
 ---
-### Server 1 DHCP POOL
+### 📡 Server 1 DHCP POOL
 
 **Primary Server**
-
-**Desktop → IP Configuration**
-
-- IP Address: 192.168.10.10
-- Subnet Mask: 255.255.255. 0
-- Default Gateway: 192.168.10.1
-
-**Configure DHCP pools (Packet Tracer Server GUI)**
 
 **Create Pool VLAN10-HR**
 - Default Gateway: 192.168.10.1
@@ -323,39 +174,15 @@ write memory
 - End IP: 192.168.10.100
 - Subnet Mask: 255.255.255.0
 
-**Create Pool VLAN20-FIN**
-
-- Default Gateway: 192.168.20.1
-- Start IP: 192.168.20.50
-- End IP: 192.168.20.100
-- Subnet Mask: 255.255.255.0
-
+Refer to full files: 
+- [Server Configs →](configs/server-config/server1.txt)
 ---
-### Server 2 DHCP POOL
+### 📡 Server 2 DHCP POOL
 
 **Backup Server**
 
-**Desktop → IP Configuration**
-
-- IP Address: 192.168.10.11
-- Subnet Mask: 255.255.255.0
-- Default Gateway: 192.168.10.1
-
-**Configure DHCP pools (Packet Tracer Server GUI)**
-
-**Create Pool VLAN10-HR-BACKUP**
-
-- Default Gateway: 192.168.10.1
-- Start IP: 192.168.10.101
-- End IP: 192.168.10.150
-- Subnet Mask: 255.255.255.0
-
-**Create Pool VLAN20-FIN-BACKUP**
-
-- Default Gateway: 192.168.20.1
-- Start IP: 192.168.20.101
-- End IP: 192.168.20.150
-- Subnet Mask: 255.255.255.0
+Refer to full files: 
+- [Server Configs →](configs/server-config/server2.txt)
 
 ---
 
@@ -371,43 +198,48 @@ The DHCP issue occurs because Router-on-a-Stick with multiple VLANs in Packet Tr
 Manual IP assignment was used to complete verification steps and demonstrate failover.
 
 ---
-## 9️⃣ Verification
+## ✅ Verification
 
 ### Topology Overview
 
-<img src="topology\topology_overview.png" alt="LAB TOPOLOGY" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+<img src="topology/topology_overview.png" alt="LAB TOPOLOGY" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 
-## Step 1: Verify VLANs
+## Step 1: 🔍 Verify VLANs
 ```text
 SW1> show vlan brief
 SW2> show vlan brief
 ```
 **SW1**
-<img src="screenshots\sw1_vlan_brief.png" alt="SW1 VLAN BRIEF" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/sw1_vlan_brief.png" alt="SW1 VLAN BRIEF" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **SW2**
-<img src="screenshots\sw2_vlan_brief.png" alt="SW2 VLAN BRIEF" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
-## Step 2: Verify Trunks
+<img src="screenshots/sw2_vlan_brief.png" alt="SW2 VLAN BRIEF" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+## Step 2: 🔗 Verify Trunks
 ```text
 SW1> show interfaces trunk
 SW2> show interfaces trunk
 ```
 **SW1**
-<img src="screenshots\sw1_trunk_status.png" alt="SW1 TRUNK STATUS" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/sw1_trunk_status.png" alt="SW1 TRUNK STATUS" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **SW2**
-<img src="screenshots\sw2_trunk_status.png" alt="SW2 TRUNK STATUS" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
-## Step 3: Verify Router Subinterfaces
+<img src="screenshots/sw2_trunk_status.png" alt="SW2 TRUNK STATUS" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+## Step 3: 🚦 Verify Router Subinterfaces
 ```text
 R1> show ip interface brief
 ```
 **R1** 
-<img src="screenshots\r1_ip_brief.png" alt="R1 IP INTERFACE BRIEF" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
-## Step 4: Verify DHCP Assignment (Manual Workaround)
+<img src="screenshots/r1_ip_brief.png" alt="R1 IP INTERFACE BRIEF" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+## Step 4: 📡 Verify DHCP Assignment (Manual Workaround)
 
 > Note: 
 - PCs are intended to receive IPs dynamically from DHCP. 
@@ -420,24 +252,28 @@ R1> show ip interface brief
 | PC3 | 192.168.20.50  | 255.255.255.0  | 192.168.20.1    |
 
 **PC1**
-<img src="screenshots\pc1_vlan10_ip_assigned.png" alt="PC1 Static IP VLAN 10" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc1_vlan10_ip_assigned.png" alt="PC1 Static IP VLAN 10" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **PC3**
-<img src="screenshots\pc3_vlan20_ip_assigned.png" alt="PC3 Static IP VLAN 20" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
-## Step 5: Verify Inter-VLAN Connectivity
+<img src="screenshots/pc3_vlan20_ip_assigned.png" alt="PC3 Static IP VLAN 20" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+## Step 5: 🔌 Verify Inter-VLAN Connectivity
 ```text
 PC1> ping 192.168.20.50
 PC3> ping 192.168.10.50
 ```
 
 **PC1**
-<img src="screenshots\pc1_ping_vlan20.png" alt="PC1 PING VLAN 20" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc1_ping_vlan20.png" alt="PC1 PING VLAN 20" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **PC3**
-<img src="screenshots\pc3_ping_vlan10.png" alt="PC3 PING VLAN 10" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
-## Step 6: Test DHCP Failover
+<img src="screenshots/pc3_ping_vlan10.png" alt="PC3 PING VLAN 10" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+## Step 6: 📡 Test DHCP Failover
 
 - Turn Server1 OFF, Server2 ON.
 - Assign backup IPs manually (Packet Tracer limitation)
@@ -447,10 +283,12 @@ PC3: 192.168.20.101
 ```
 
 **PC1**
-<img src="screenshots\pc1_failover_ip.png" alt="PC1 PING FAILOVER" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc1_failover_ip.png" alt="PC1 PING FAILOVER" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **PC3**
-<img src="screenshots\pc3_failover_ip.png" alt="PC3 PING FAILOVER" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc3_failover_ip.png" alt="PC3 PING FAILOVER" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 - Verify connectivity to gateway:
 ```text
@@ -459,41 +297,65 @@ PC3> ping 192.168.20.1
 ```
 
 **PC1**
-<img src="screenshots\pc1_ping_failover_gw.png" alt="PC1 PING FAILOVER GATEWAY" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc1_ping_failover_gw.png" alt="PC1 PING FAILOVER GATEWAY" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **PC3**
-<img src="screenshots\pc3_ping_failover_gw.png" alt="PC3 PING FAILOVER GATEWAY" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
-## Step 7: Test Inter-VLAN after Failover
+<img src="screenshots/pc3_ping_failover_gw.png" alt="PC3 PING FAILOVER GATEWAY" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+## Step 7: 🔍 Test Inter-VLAN after Failover
 ```text
 PC1> ping 192.168.20.101
 PC3> ping 192.168.10.101
 ```
 **PC1**
-<img src="screenshots\pc1_ping_vlan20_failover.png" alt="PC1 PING FAILOVER VLAN20" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc1_ping_vlan20_failover.png" alt="PC1 PING FAILOVER VLAN20" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 **PC2**
-<img src="screenshots\pc3_ping_vlan10_failover.png" alt="PC1 PING FAILOVER VLAN10" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
+
+<img src="screenshots/pc3_ping_vlan10_failover.png" alt="PC1 PING FAILOVER VLAN10" style="border:1px solid #ddd; padding:5px; max-width:100%; height:auto;">
 
 ---
+## ⚡ How to Run Lab
+
+1. Download or clone the repository.
+
+2. Open **Packet Tracer** and load the lab file:
+   lab_file/dhcp-redundancy-with-Failover-in-Office-Network.pkt
+
+3. Load device configurations from the configs/ folder if needed.
+
+4. Start all devices and verify VLANs, trunk links, and inter-VLAN routing.
+
+5. Test DHCP assignment for PCs (manual IPs may be needed due to Packet Tracer limitations).
+
+6. Simulate failover by turning off **Server1** and assigning backup IPs via **Server2.**
+
+7. Verify connectivity and inter-VLAN communication post-failover.
+
+---
+
 ## Folder Structure
 
 dhcp-redundancy-with-Failover-in-Office-Network/
 ├─ README.md
 ├─ LICENSE
 ├─ verification.md
-├─ lab_files/
+├─ lab_file/
 │   └─ dhcp-redundancy-with-Failover-in-Office-Network.pkt
 ├─ topology/
 │   └─ topology_overview.png
-├─ router-configs/
-│   └─ R1.cfg
-├─ switch-configs/
-│   ├─ SW1.cfg
-│   └─ SW2.cfg
-├─ server-configs/
-│   ├─ server1.cfg
-│   └─ server2.cfg
+├─ configs/
+│   └─ router-config/
+│      └─ r1.cfg  
+│   └─ switch-config/
+│      ├─ sw1.cfg
+│      └─ sw2.cfg
+│   └─ server-config/
+│      ├─ server1.text
+│      └─ server2.txt
 ├─ screenshots/
 │   ├─ pc1_failover_ip.png
 │   ├─ pc1_ping_failover_gw.png
@@ -509,7 +371,32 @@ dhcp-redundancy-with-Failover-in-Office-Network/
 │   ├─ sw1_vlan_brief.png
 │   ├─ sw2_trunk_status.png
 │   └─ sw2_vlan_brief.png
-|
+│
 
+---
+
+## 🎓 Learning Outcomes
+
+After completing this lab, learners will be able to:
+
+- Configure VLANs and assign switch ports to the correct VLAN.
+
+- Set up a router-on-a-stick for inter-VLAN routing.
+
+- Configure primary and backup DHCP servers with failover pools.
+
+- Understand DHCP relay (IP helper-address) functionality for VLANs.
+
+- Test and verify DHCP assignment, network connectivity, and failover scenarios.
+
+- Document Packet Tracer limitations and implement manual workarounds.
+
+- Build a structured lab portfolio for CCNA practical assessments.
+
+---
+
+### 📂 Repository Info
+This project is part of my **CCNA Lab Portfolio**.  
+Explore more labs here 👉 [@asmymhm](https://github.com/asmymhm)
 
 ---
