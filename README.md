@@ -1,24 +1,24 @@
-﻿# 📡🌐 DHCP Redundancy with Failover in Office Network 🔄🖥️
+﻿# 📡🌐 DHCP Redundancy with Failover in Office Network
 
 ## Table of Contents
-1. [📘 Project Overview](#-project-overview)
-2. [🎯 Project Objective](#-project-objective)
-3. [🌐 Network Topology](#-network-topology)
-4. [🗂️ Device Interface Table](#-device-interface-table)
-5. [📝 IP Addressing Table](#-ip-addressing-table)
-6. [🔧 Lab Steps](#-lab-steps)
-7. [💻 Device Configuration](#-device-configuration)
-   - [🔀 Switch 1](#-switch-1)  
-   - [🔀 Switch 2](#-switch-2)  
-   - [🚦 Router 1](#-router-1)  
-   - [📡 Server 1 DHCP POOL](#-server-1-dhcp-pool)  
-   - [📡 Server 2 DHCP POOL](#-server-2-dhcp-pool)   
-8. [Packet Tracer Limitations & Workarounds](#packet-tracer-limitations-workarounds)
-9. [✅ Verification](#-verification)
-10.[⚡ How to Run Lab](#-how-to-run-lab)
-11.[📂 -Folder Structure](#folder-structure)
-12.[🎓 Learning Outcomes](#-learning-outcomes)
-13.[ℹ️ Repository Info](#-repository-info)
+1.  [📘 Project Overview](#-project-overview)
+2.  [🎯 Project Objective](#-project-objective)
+3.  [🌐 Network Topology](#-network-topology)
+4.  [🗂️ Device Interface Table](#-device-interface-table)
+5.  [📝 IP Addressing Table](#-ip-addressing-table)
+6.  [🔧 Lab Steps](#-lab-steps)
+7.  [💻 Device Configuration](#-device-configuration)
+    - [🔀 Switch 1](#-switch-1)  
+    - [🔀 Switch 2](#-switch-2)  
+    - [🚦 Router 1](#-router-1)  
+    - [📡 Server 1 DHCP POOL](#-server-1-dhcp-pool)  
+    - [📡 Server 2 DHCP POOL](#-server-2-dhcp-pool)   
+8.  [🧰 Packet Tracer Limitations](#-packet-tracer-limitations)
+9.  [✅ Verification](#-verification)
+10. [⚡ How to Run Lab](#-how-to-run-lab)
+11. [📂 -Folder Structure](#folder-structure)
+12. [🎓 Learning Outcomes](#-learning-outcomes)
+13. [ℹ️ Repository Info](#-repository-info)
 ---
 
 ## 📘 Project Overview
@@ -186,10 +186,12 @@ Refer to full files:
 
 ---
 
-## 8️⃣ Packet Tracer Limitations & Workarounds
+## 🧰 Packet Tracer Limitations
 
 - DHCP in multi-VLAN topologies may:  
+
   1. Assign IP outside the DHCP pool  
+
   2. Fail to assign default gateway and DNS  
 
 **Summary:** 
